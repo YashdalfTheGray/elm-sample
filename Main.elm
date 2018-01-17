@@ -41,9 +41,11 @@ update msg {username, imageUrl} =
 view : Model -> Html Msg
 view model =
   div []
-    [ input [onInput NewUsername, value model.username] []
+    [ h2 [] [text "Github Picture Getter"]
+    , p [] []
+    , input [onInput NewUsername, value model.username] []
     , button [onClick GetUsername] [text "Get Picture"]
-    , br [] []
+    , p [] []
     , img [src model.imageUrl] []
     ]
 
