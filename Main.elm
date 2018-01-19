@@ -3,6 +3,30 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as Decode
+import Styled exposing (..)
+
+title =
+  styled h2
+    [ fontFamily sansSerif
+    , margin (px 8)
+    , fontSize (px 32)
+    ]
+
+appWrapper =
+  styled div
+    [ margin (px 16) ]
+
+appBody =
+  styled div
+    [ margin (px 16) ]
+
+largeInput =
+  styled input
+    [ fontSize (px 16) ]
+
+largeButton =
+  styled button
+    [ fontSize (px 16) ]
 
 main =
   Html.program
@@ -40,13 +64,15 @@ update msg {username, imageUrl} =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ h2 [] [text "Github Picture Getter"]
-    , p [] []
-    , input [onInput NewUsername, value model.username] []
-    , button [onClick GetUsername] [text "Get Picture"]
-    , p [] []
-    , img [src model.imageUrl] []
+  appWrapper []
+    [ title [] [ text "Github Picture Getter" ]
+    , appBody []
+      [ largeInput [ placeholder "Github Username", onInput NewUsername, value model.username ] []
+      , p [] []
+      , largeButton [ onClick GetUsername ] [ text "Get Picture" ]
+      , p [] []
+      , img [ src model.imageUrl ] []
+      ]
     ]
 
 subscriptions : Model -> Sub Msg
